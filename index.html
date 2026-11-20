@@ -56,17 +56,18 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 <defs><pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#b5a17e"/></pattern><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#2475b9"/></marker></defs>
 <rect width="760" height="430" fill="#eaf6fb"/><path d="M0 165H760V430H0Z" fill="#d8c39a"/><path d="M0 165H760V430H0Z" fill="url(#dots)" opacity=".45"/>
 <path d="M0 145H370L408 155L430 190L760 190V0H0Z" fill="#a9dce9"/><path d="M0 145H370L408 155L430 190L760 190" fill="none" stroke="#5b9eb8" stroke-width="2"/>
-<path d="M0 145H365L405 155L424 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370L760 430H0Z" fill="#cda96d" stroke="#98784a" stroke-width="2"/>
-<path d="M0 145H365L405 155L424 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#6b563c" stroke-width="3"/>
+<path d="M0 145H365L405 155L424 190H760V430H0Z" fill="#cda96d" stroke="#98784a" stroke-width="2"/>
+<path d="M0 145H365L405 155L424 190" fill="none" stroke="#6b563c" stroke-width="3"/>
 <path d="M0 145H365L405 155L424 190" fill="none" stroke="#2475b9" stroke-width="7"/>
 <g id="oceanicSlab">
-<path d="M760 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#267eae" stroke-width="24" opacity=".95" stroke-linecap="round"/>
-<path d="M760 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#b8e2ef" stroke-width="2" stroke-dasharray="7 8"/>
+<!-- 海洋プレート：海底から海溝で折れ曲がり、左下へ大陸プレートの下に沈み込む -->
+<path d="M760 178H450Q430 178 414 198L220 430H260L440 222Q455 202 478 202H760Z" fill="#267eae" stroke="#185f88" stroke-width="2" stroke-linejoin="round"/>
+<path d="M760 187H455Q435 187 422 203L245 425" fill="none" stroke="#b8e2ef" stroke-width="3" stroke-dasharray="7 8" opacity=".95"/>
 </g>
 <path d="M175 130H320" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/><path d="M690 125H545" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/>
 <text x="30" y="45" font-size="17" fill="#31566c" font-weight="bold">陸</text><text x="660" y="45" font-size="17" fill="#31566c" font-weight="bold">海</text>
 <text x="60" y="112" font-size="18" fill="#173c58" font-weight="bold">大陸プレート</text><text x="565" y="112" font-size="18" fill="#173c58" font-weight="bold">海洋プレート</text>
-<text x="270" y="177" font-size="13" fill="#173c58">海溝</text><path d="M320 180L402 157" stroke="#173c58" stroke-width="1.5"/>
+<text x="345" y="165" font-size="13" fill="#173c58">海溝</text><path d="M385 168L414 190" stroke="#173c58" stroke-width="1.5"/>
 <text x="42" y="220" font-size="15" fill="#59472e">大陸側の地殻</text><text x="525" y="400" font-size="14" fill="#174d6a">沈み込む海洋プレート</text>
 <g id="boundaryFocus"><circle cx="431" cy="205" r="12" fill="#f5a623" stroke="#9d5710" stroke-width="3"/><path d="M431 186V174M431 224V236M412 205H400M450 205H462" stroke="#d97706" stroke-width="3"/><text x="465" y="202" font-size="15" fill="#8a4c0b" font-weight="bold">震源</text><text x="465" y="220" font-size="12" fill="#8a4c0b">プレート境界付近</text></g>
 <g id="inlandFocus" class="hidden"><path d="M205 145L245 205L280 260" stroke="#8a5b32" stroke-width="5" fill="none"/><circle cx="280" cy="260" r="12" fill="#f5a623" stroke="#9d5710" stroke-width="3"/><path d="M280 241V229M280 279V291M261 260H249M299 260H311" stroke="#d97706" stroke-width="3"/><text x="300" y="258" font-size="15" fill="#8a4c0b" font-weight="bold">震源</text><text x="300" y="277" font-size="12" fill="#8a4c0b">陸側の地殻内</text><text x="105" y="290" font-size="14" fill="#59472e">断層</text></g>
