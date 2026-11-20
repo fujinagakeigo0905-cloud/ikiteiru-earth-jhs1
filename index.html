@@ -15,6 +15,8 @@ h1{font-size:clamp(25px,4vw,38px);margin:8px 0}.lead{color:var(--muted);margin:0
 .workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:18px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab,button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}.tab[aria-selected=true],button.primary{background:var(--blue);color:white;border-color:var(--blue)}
 svg{width:100%;height:auto;display:block;background:#f7fbfd;border-radius:12px}
 #oceanicSlab{transition:transform .42s ease}
+#subductingBody{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+#boundaryFocus{transition:opacity .3s ease}
 #boundaryFocus{transition:opacity .25s ease}
 #stressMarks,#slipFlash{transition:opacity .25s ease}.scene-title{font-size:19px;margin:0 0 8px}.muted{color:var(--muted);line-height:1.8}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}.controls label{font-size:13px;color:var(--muted)}input{accent-color:var(--blue)}.info h3{margin:0 0 10px}.info p{line-height:1.85;margin:0 0 12px}.key{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
 .note{background:#fff8e9;border:1px solid #f0dfb9;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.7;margin-top:14px}
@@ -103,13 +105,16 @@ document.getElementById('menu1').addEventListener('click',()=>{menuScreen.classL
 document.getElementById('backToMenu').addEventListener('click',()=>{stop();lessonScreen.classList.add('hidden');menuScreen.classList.remove('hidden');window.scrollTo(0,0)});
 function render(){
   const p=Math.min(phase,100);
-  document.getElementById('subductingBody').style.transform='translate('+(-p*1.15)+'px,'+(p*1.35)+'px)';
+  // 海底・海溝の位置を固定し、沈み込むプレート本体のみ大陸側へ深く移動
+  const body=document.getElementById('subductingBody');
+  body.style.transform='translate('+(-p*.8)+'px,'+(p*.95)+'px)';
   document.getElementById('motion').style.transform='translateX('+(-p*.18)+'px)';
-  document.getElementById('stressMarks').style.opacity=p>=25&&p<85?'1':'0';
+  document.getElementById('stressMarks').style.opacity=p>=20&&p<85?'1':'0';
   document.getElementById('slipFlash').style.opacity=p>=85?'1':'0';
   const focus=document.querySelector('#boundaryFocus circle');
   if(focus) focus.setAttribute('r',p>=85?'16':'12');
-  document.getElementById('boundaryFocus').style.opacity=(view==='boundary'&&playing&&p>0)?'1':'0';
+  // 再生開始後に震源を表示し、リセット時のみ消す。停止中も表示状態を維持。
+  document.getElementById('boundaryFocus').style.opacity=(view==='boundary'&&p>0)?'1':'0';
 }
 function step(){phase=Math.min(100,phase+5);render();if(phase>=100)stop()}
 function stop(){playing=false;clearInterval(timer);document.getElementById('play').textContent='▶ 再生'}
