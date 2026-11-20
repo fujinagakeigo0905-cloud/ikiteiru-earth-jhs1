@@ -13,7 +13,9 @@ h1{font-size:clamp(25px,4vw,38px);margin:8px 0}.lead{color:var(--muted);margin:0
 .panel{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 28px #17314b0a}
 .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.tile{padding:18px;border:1px solid var(--line);border-radius:14px;background:white;text-align:left;color:var(--ink)}.tile.active{border:2px solid var(--blue);background:var(--sky)}.tile small{display:block;color:var(--muted);margin-top:7px}.tile:disabled{opacity:.48}
 .workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.8fr);gap:18px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab,button{border:1px solid var(--line);background:white;color:var(--ink);border-radius:10px;padding:10px 14px;font:inherit;cursor:pointer}.tab[aria-selected=true],button.primary{background:var(--blue);color:white;border-color:var(--blue)}
-svg{width:100%;height:auto;display:block;background:#f7fbfd;border-radius:12px}.scene-title{font-size:19px;margin:0 0 8px}.muted{color:var(--muted);line-height:1.8}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}.controls label{font-size:13px;color:var(--muted)}input{accent-color:var(--blue)}.info h3{margin:0 0 10px}.info p{line-height:1.85;margin:0 0 12px}.key{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+svg{width:100%;height:auto;display:block;background:#f7fbfd;border-radius:12px}
+#oceanicSlab{transition:transform .42s ease}
+#stressMarks,#slipFlash{transition:opacity .25s ease}.scene-title{font-size:19px;margin:0 0 8px}.muted{color:var(--muted);line-height:1.8}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}.controls label{font-size:13px;color:var(--muted)}input{accent-color:var(--blue)}.info h3{margin:0 0 10px}.info p{line-height:1.85;margin:0 0 12px}.key{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
 .note{background:#fff8e9;border:1px solid #f0dfb9;border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.7;margin-top:14px}
 .hidden{display:none!important}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare .panel{padding:12px}
 footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
@@ -57,8 +59,10 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 <path d="M0 145H365L405 155L424 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370L760 430H0Z" fill="#cda96d" stroke="#98784a" stroke-width="2"/>
 <path d="M0 145H365L405 155L424 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#6b563c" stroke-width="3"/>
 <path d="M0 145H365L405 155L424 190" fill="none" stroke="#2475b9" stroke-width="7"/>
-<path d="M760 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#267eae" stroke-width="24" opacity=".95"/>
+<g id="oceanicSlab">
+<path d="M760 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#267eae" stroke-width="24" opacity=".95" stroke-linecap="round"/>
 <path d="M760 190L450 210L485 232L525 255L570 278L615 300L665 326L715 350L760 370" fill="none" stroke="#b8e2ef" stroke-width="2" stroke-dasharray="7 8"/>
+</g>
 <path d="M175 130H320" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/><path d="M690 125H545" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/>
 <text x="30" y="45" font-size="17" fill="#31566c" font-weight="bold">陸</text><text x="660" y="45" font-size="17" fill="#31566c" font-weight="bold">海</text>
 <text x="60" y="112" font-size="18" fill="#173c58" font-weight="bold">大陸プレート</text><text x="565" y="112" font-size="18" fill="#173c58" font-weight="bold">海洋プレート</text>
@@ -67,6 +71,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 <g id="boundaryFocus"><circle cx="431" cy="205" r="12" fill="#f5a623" stroke="#9d5710" stroke-width="3"/><path d="M431 186V174M431 224V236M412 205H400M450 205H462" stroke="#d97706" stroke-width="3"/><text x="465" y="202" font-size="15" fill="#8a4c0b" font-weight="bold">震源</text><text x="465" y="220" font-size="12" fill="#8a4c0b">プレート境界付近</text></g>
 <g id="inlandFocus" class="hidden"><path d="M205 145L245 205L280 260" stroke="#8a5b32" stroke-width="5" fill="none"/><circle cx="280" cy="260" r="12" fill="#f5a623" stroke="#9d5710" stroke-width="3"/><path d="M280 241V229M280 279V291M261 260H249M299 260H311" stroke="#d97706" stroke-width="3"/><text x="300" y="258" font-size="15" fill="#8a4c0b" font-weight="bold">震源</text><text x="300" y="277" font-size="12" fill="#8a4c0b">陸側の地殻内</text><text x="105" y="290" font-size="14" fill="#59472e">断層</text></g>
 <g id="motion"><path d="M690 90L625 90" stroke="#0b78b5" stroke-width="5" marker-end="url(#arr)"/><text x="600" y="75" font-size="12" fill="#0b5b8c">移動</text></g>
+<g id="stressMarks" opacity="0"><path d="M414 178l-9 -12m18 12l9 -12m-18 28l-9 12m18 -12l9 12" stroke="#d97706" stroke-width="3" stroke-linecap="round"/><text x="455" y="160" font-size="13" fill="#a4530a" font-weight="bold">ひずみがたまる</text></g>
+<g id="slipFlash" opacity="0"><path d="M418 174l-10 18 12 5 -9 18 26 -25 -13 -4 10 -12Z" fill="#f5a623" stroke="#a4530a" stroke-width="1.5"/></g>
 <text x="18" y="414" font-size="11" fill="#52677b">模式図：位置・形・動きは理解のために単純化しています。</text>
 </svg>
 <div class="key"><span><i class="dot" style="background:#cda96d"></i>大陸側</span><span><i class="dot" style="background:#267eae"></i>海洋プレート</span><span><i class="dot" style="background:#f5a623"></i>震源</span></div>
@@ -90,11 +96,20 @@ tabs.forEach(t=>t.addEventListener('click',()=>select(t.dataset.view)));
 const menuScreen=document.getElementById('menuScreen'),lessonScreen=document.getElementById('lessonScreen');
 document.getElementById('menu1').addEventListener('click',()=>{menuScreen.classList.add('hidden');lessonScreen.classList.remove('hidden');window.scrollTo(0,0)});
 document.getElementById('backToMenu').addEventListener('click',()=>{stop();lessonScreen.classList.add('hidden');menuScreen.classList.remove('hidden');window.scrollTo(0,0)});
-function render(){document.getElementById('motion').style.transform='translateX('+((phase%5)-2)*3+'px)';document.getElementById('motion').style.opacity=phase%2?.65:1}
-function step(){phase++;render()}
+function render(){
+  const p=Math.min(phase,100);
+  document.getElementById('oceanicSlab').style.transform='translate('+(-p*.22)+'px,'+(p*.13)+'px)';
+  document.getElementById('motion').style.transform='translateX('+(-p*.18)+'px)';
+  document.getElementById('stressMarks').style.opacity=p>=25&&p<85?'1':'0';
+  document.getElementById('slipFlash').style.opacity=p>=85?'1':'0';
+  const focus=document.querySelector('#boundaryFocus circle');
+  if(focus) focus.setAttribute('r',p>=85?'16':'12');
+}
+function step(){phase=Math.min(100,phase+5);render();if(phase>=100)stop()}
 function stop(){playing=false;clearInterval(timer);document.getElementById('play').textContent='▶ 再生'}
-function start(){if(playing){stop();return}playing=true;document.getElementById('play').textContent='Ⅱ 一時停止';const speed=Number(document.getElementById('speed').value);timer=setInterval(step,1100/speed)}
+function start(){if(playing){stop();return}if(phase>=100){phase=0;render()}playing=true;document.getElementById('play').textContent='Ⅱ 一時停止';const speed=Number(document.getElementById('speed').value);timer=setInterval(step,150/speed)}
 document.getElementById('play').addEventListener('click',start);document.getElementById('step').addEventListener('click',step);document.getElementById('reset').addEventListener('click',()=>{stop();phase=0;render()});
+render();
 document.getElementById('speed').addEventListener('input',e=>{let v=Number(e.target.value);document.getElementById('speedVal').textContent=['','ゆっくり','ややゆっくり','標準','速い','最速'][v];if(playing){stop();start()}});
 </script>
 </body></html>
