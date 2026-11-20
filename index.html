@@ -18,16 +18,34 @@ svg{width:100%;height:auto;display:block;background:#f7fbfd;border-radius:12px}.
 .hidden{display:none!important}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare .panel{padding:12px}
 footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 @media(max-width:800px){.menu{grid-template-columns:repeat(2,1fr)}.workspace{grid-template-columns:1fr}.compare{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}}
+
+.screen{animation:appear .28s ease both}.hidden{display:none!important}
+.menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:30px 0}
+.tile{min-height:138px;padding:22px 24px;border-radius:18px;position:relative;transition:transform .18s,box-shadow .18s,border-color .18s}
+.tile:not(:disabled){cursor:pointer}.tile:not(:disabled):hover{transform:translateY(-3px);box-shadow:0 12px 26px #17314b12;border-color:#83b7d9}
+.tile b{font-size:20px}.tile small{font-size:14px;line-height:1.6}
+.tile.active:after{content:"学習を始める →";display:block;color:var(--blue);font-size:13px;font-weight:700;margin-top:15px}
+.lesson-head{display:flex;align-items:flex-start;gap:22px;margin:8px 0 24px}
+.back-button{white-space:nowrap;border:1px solid var(--line);background:white;color:var(--blue);font-weight:700}
+.lesson-heading{margin:4px 0 4px;font-size:30px}.lesson-head .lead{margin:0}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:650px){.menu{grid-template-columns:1fr}.lesson-head{display:block}.back-button{margin-bottom:18px}}
 </style>
 </head>
 <body>
 <header><div class="brand">SCIENCE VISUAL LAB<strong>活きている地球</strong></div><div>中学校１年 理科｜授業者用ビジュアル教材</div></header>
 <main>
+<div id="menuScreen" class="screen">
 <div class="eyebrow">EARTH SCIENCE / GRADE 7</div><h1>大地の動きを、見て理解する。</h1><p class="lead">地球の内部で起きている変化を、模式図とアニメーションで説明する授業用ツールです。</p>
+
 <section class="menu" aria-label="単元メニュー">
 <button class="tile active" id="menu1"><b>01　身近な大地</b><small>プレート境界・内陸の地震</small></button>
 <button class="tile" disabled><b>02　ゆれる大地</b><small>準備中</small></button><button class="tile" disabled><b>03　火をふく大地</b><small>準備中</small></button><button class="tile" disabled><b>04　語る大地</b><small>準備中</small></button>
 </section>
+
+</div>
+<div id="lessonScreen" class="screen hidden">
+<div class="lesson-head"><button id="backToMenu" class="back-button">← 単元メニューへ</button><div><div class="eyebrow">LESSON / 01</div><h1 class="lesson-heading">身近な大地</h1><p class="lead">地震が起こる場所と、そのしくみをモデルで確かめます。</p></div></div>
 <section class="panel">
 <div class="tabs" role="tablist"><button class="tab" data-view="boundary" aria-selected="true">① プレート境界の地震</button><button class="tab" data-view="inland" aria-selected="false">② 内陸の地震</button><button class="tab" data-view="compare" aria-selected="false">③ しくみを比較</button></div>
 <div id="single" class="workspace">
@@ -61,6 +79,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 <div class="panel"><h3>② 内陸の地震</h3><p class="muted">陸側プレートの浅い地殻内にある断層がずれ動く。</p><svg viewBox="0 0 340 180"><rect width="340" height="180" fill="#eaf6fb"/><path d="M0 65H340V180H0" fill="#cda96d"/><path d="M340 65L210 90L235 110L340 160" fill="#267eae"/><path d="M70 65L110 110L145 155" stroke="#8a5b32" stroke-width="5" fill="none"/><circle cx="145" cy="155" r="8" fill="#f5a623"/><text x="15" y="28" font-size="12">陸側の地殻</text><text x="158" y="151" font-size="11">震源</text></svg></div>
 </div>
 </section>
+</div>
 </main><footer>授業者用模式図｜実際の地形・プレート形状・地震規模を再現したものではありません。</footer>
 <script>
 const tabs=[...document.querySelectorAll('.tab')],single=document.getElementById('single'),compare=document.getElementById('compare');
@@ -68,6 +87,9 @@ let view='boundary',playing=false,phase=0,timer=null;
 const titles={boundary:'プレート境界の地震',inland:'内陸の地震'};
 function select(v){view=v;tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.view===v)));single.classList.toggle('hidden',v==='compare');compare.classList.toggle('hidden',v!=='compare');if(v!=='compare'){document.getElementById('sceneTitle').textContent=titles[v];document.getElementById('infoTitle').textContent=titles[v];document.getElementById('boundaryFocus').classList.toggle('hidden',v!=='boundary');document.getElementById('inlandFocus').classList.toggle('hidden',v!=='inland');document.getElementById('infoText').textContent=v==='boundary'?'海洋プレートは海溝から大陸プレートの下へ沈み込んでいます。プレート境界では、ひずみがたまり、限界に達すると岩盤がずれ動いて地震が発生します。':'プレートの沈み込みなどによって陸側の地殻に力が加わり、内陸の浅い場所にある断層がずれ動くことで地震が発生します。震源は陸側の地殻内にあります。';document.getElementById('infoExtra').textContent=v==='boundary'?'震源は、プレート境界付近に位置する模式で示しています。':'海洋プレートの内部やプレート境界ではなく、陸側の地殻内に震源を示しています。';}stop();}
 tabs.forEach(t=>t.addEventListener('click',()=>select(t.dataset.view)));
+const menuScreen=document.getElementById('menuScreen'),lessonScreen=document.getElementById('lessonScreen');
+document.getElementById('menu1').addEventListener('click',()=>{menuScreen.classList.add('hidden');lessonScreen.classList.remove('hidden');window.scrollTo(0,0)});
+document.getElementById('backToMenu').addEventListener('click',()=>{stop();lessonScreen.classList.add('hidden');menuScreen.classList.remove('hidden');window.scrollTo(0,0)});
 function render(){document.getElementById('motion').style.transform='translateX('+((phase%5)-2)*3+'px)';document.getElementById('motion').style.opacity=phase%2?.65:1}
 function step(){phase++;render()}
 function stop(){playing=false;clearInterval(timer);document.getElementById('play').textContent='▶ 再生'}
