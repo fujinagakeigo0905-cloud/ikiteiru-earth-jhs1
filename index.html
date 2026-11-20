@@ -107,7 +107,7 @@ function render(){
   const p=Math.min(phase,100);
   // 海底・海溝の位置を固定し、沈み込むプレート本体のみ大陸側へ深く移動
   const body=document.getElementById('subductingBody');
-  body.style.transform='rotate('+(p*.22)+'deg)';
+  body.style.transform='rotate('+(-p*.22)+'deg)';
   document.getElementById('motion').style.transform='translateX('+(-p*.18)+'px)';
   document.getElementById('stressMarks').style.opacity=p>=20&&p<85?'1':'0';
   document.getElementById('slipFlash').style.opacity=p>=85?'1':'0';
