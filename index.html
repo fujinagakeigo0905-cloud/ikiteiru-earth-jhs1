@@ -61,9 +61,12 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:30px}
 <path d="M0 145H365L405 155L424 190" fill="none" stroke="#6b563c" stroke-width="3"/>
 <path d="M0 145H365L405 155L424 190" fill="none" stroke="#2475b9" stroke-width="7"/>
 <g id="oceanicSlab">
-<!-- 海洋プレート：海底から海溝で折れ曲がり、左下へ大陸プレートの下に沈み込む -->
-<path d="M760 178H450Q430 178 414 198L220 430H260L440 222Q455 202 478 202H760Z" fill="#267eae" stroke="#185f88" stroke-width="2" stroke-linejoin="round"/>
-<path d="M760 187H455Q435 187 422 203L245 425" fill="none" stroke="#b8e2ef" stroke-width="3" stroke-dasharray="7 8" opacity=".95"/>
+<!-- 海底部分は高さを固定。沈み込む部分のみアニメーション -->
+<path d="M760 178H450Q430 178 414 198" fill="none" stroke="#267eae" stroke-width="24" stroke-linecap="round"/>
+<g id="subductingBody">
+<path d="M414 198L220 430H260L440 222Z" fill="#267eae" stroke="#185f88" stroke-width="2" stroke-linejoin="round"/>
+<path d="M422 203L245 425" fill="none" stroke="#b8e2ef" stroke-width="3" stroke-dasharray="7 8" opacity=".95"/>
+</g>
 </g>
 <path d="M175 130H320" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/><path d="M690 125H545" stroke="#2475b9" stroke-width="4" marker-end="url(#arr)"/>
 <text x="30" y="45" font-size="17" fill="#31566c" font-weight="bold">陸</text><text x="660" y="45" font-size="17" fill="#31566c" font-weight="bold">海</text>
@@ -100,7 +103,7 @@ document.getElementById('menu1').addEventListener('click',()=>{menuScreen.classL
 document.getElementById('backToMenu').addEventListener('click',()=>{stop();lessonScreen.classList.add('hidden');menuScreen.classList.remove('hidden');window.scrollTo(0,0)});
 function render(){
   const p=Math.min(phase,100);
-  document.getElementById('oceanicSlab').style.transform='translate('+(-p*1.15)+'px,'+(p*1.35)+'px)';
+  document.getElementById('subductingBody').style.transform='translate('+(-p*1.15)+'px,'+(p*1.35)+'px)';
   document.getElementById('motion').style.transform='translateX('+(-p*.18)+'px)';
   document.getElementById('stressMarks').style.opacity=p>=25&&p<85?'1':'0';
   document.getElementById('slipFlash').style.opacity=p>=85?'1':'0';
